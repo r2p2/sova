@@ -11,6 +11,7 @@ add_executable(sova
 	src/capture/util/time.cc
 	src/capture/x/xadapter.cc
 	src/capture/storage/stdout.cc
+	src/capture/storage/file.cc
 )
 
 target_link_libraries(sova
