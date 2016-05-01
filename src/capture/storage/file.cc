@@ -55,10 +55,7 @@ void File::_change_file()
 path File::_cap_file_path() const
 {
 	std::string const cap_file_name =
-		std::to_string(_date.year()) + "_" +
-		std::to_string(_date.month()) + "_" +
-		std::to_string(_date.day()) + "_" +
-		_name;
+		to_iso_extended_string(_date) + "_" + _name;
 
 	path cap_file_path = _cap_dir;
 	cap_file_path /= cap_file_name;
