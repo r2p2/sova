@@ -10,8 +10,8 @@ namespace capture
 namespace storage
 {
 
-File::File(std::string const& dir, std::string const& name)
-: _dir(dir)
+File::File(path const& cap_dir, std::string const& name)
+: _cap_dir(cap_dir)
 , _name(name)
 , _file()
 , _date()
@@ -25,7 +25,10 @@ File::~File()
 void File::append(Entry const& entry)
 {
 	if (_has_date_changed())
+	{
+		_check_and_create_cap_dir();
 		_change_file();
+	}
 
 	_file << _fmt(entry) << std::endl;
 }
@@ -35,21 +38,32 @@ bool File::_has_date_changed() const
 	return _date != day_clock::local_day();
 }
 
+void File::_check_and_create_cap_dir()
+{
+	if (is_directory(_cap_dir))
+		return;
+
+	create_directories(_cap_dir);
+}
+
 void File::_change_file()
 {
 	_date = day_clock::local_day();
-	_file.open(_path(), std::ios::out | std::ios::app);
+	_file.open(_cap_file_path().native(), std::ios::out | std::ios::app);
 }
 
-std::string File::_path() const
+path File::_cap_file_path() const
 {
-	std::stringstream ss;
-	ss << _dir << "/"
-		<< _date.year() << "_"
-		<< _date.month() << "_"
-		<< _date.day() << "_"
-		<< _name << ".cap";
-	return ss.str();
+	std::string const cap_file_name =
+		std::to_string(_date.year()) + "_" +
+		std::to_string(_date.month()) + "_" +
+		std::to_string(_date.day()) + "_" +
+		_name;
+
+	path cap_file_path = _cap_dir;
+	cap_file_path /= cap_file_name;
+
+	return cap_file_path;
 }
 
 std::string File::_fmt(Entry const& entry) const

@@ -17,4 +17,5 @@ add_executable(sova
 target_link_libraries(sova
 	X11
 	boost_system
+	boost_filesystem
 )
