@@ -7,6 +7,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -g -Og")
 
 add_executable(sova
 	src/main.cc
+	src/cmdln.cc
 	src/capture/ctrl.cc
 	src/capture/util/time.cc
 	src/capture/x/xadapter.cc
@@ -18,4 +19,5 @@ target_link_libraries(sova
 	X11
 	boost_system
 	boost_filesystem
+	boost_program_options
 )
