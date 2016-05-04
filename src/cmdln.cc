@@ -27,11 +27,7 @@ void CmdLn::parse_into(Args& args)
 	try
 	{
 		po::variables_map vm;
-		po::store(
-			po::parse_command_line(
-				  _argc
-				, _argv
-				, _desc), vm);
+		po::store(po::parse_command_line(_argc, _argv, _desc), vm);
 		po::notify(vm);
 
 		if (vm.count("help"))
