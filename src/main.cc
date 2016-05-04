@@ -1,3 +1,4 @@
+#include "args.h"
 #include "cmdln.h"
 
 #include "capture/storage/stdout.h"

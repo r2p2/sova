@@ -1,5 +1,7 @@
 #include "cmdln.h"
 
+#include "args.h"
+
 CmdLn::CmdLn(int argc, char* argv[])
 : _desc("Description")
 , _argc(argc)

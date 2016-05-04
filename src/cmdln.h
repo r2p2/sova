@@ -4,15 +4,7 @@
 
 namespace po = boost::program_options;
 
-struct Args
-{
-	bool print_help;
-	bool print_version;
-
-	bool cap_mode;
-
-	bool daemonize;
-};
+struct Args;
 
 class CmdLn
 {
